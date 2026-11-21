@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FARAMOSH | BonLINE</title>
+<meta name="description" content="ڕاوێژکاری تایبەتی فرۆش — خزمەتگوزاری خێرا و متمانەپێکراو">
+<meta property="og:title" content="FARAMOSH | BonLINE">
+<meta property="og:description" content="ڕاوێژکاری تایبەتی فرۆش">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Noto+Sans+Arabic:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg1:#0F172A; --bg2:#020617; --text:#F8FAFC; --muted:#94A3B8;
+    --gold:#FACC15; --gold-d:#CA8A04; --wa:#25D366; --wa-d:#128C7E;
+    --card:rgba(15,23,42,.7);
+    --font:'Noto Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif;
+  }
+
+  /* فۆنت لەسەر هەموو شتێک */
+  *, *::before, *::after, button, input, textarea, select, a{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:var(--font);
+  }
+
+  body{
+    background:radial-gradient(circle at 50% 0%,var(--bg1),var(--bg2) 70%);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px 16px 90px;
+    color:var(--text);
+    overflow-x:hidden;
+  }
+
+  .glow{
+    position:fixed;
+    width:320px;height:320px;
+    top:10%;left:50%;margin-left:-160px;
+    background:linear-gradient(135deg,#38bdf8,#a855f7 50%,#eab308);
+    filter:blur(150px);
+    border-radius:50%;
+    opacity:.35;
+    z-index:0;
+    animation:pulse 10s infinite alternate;
+  }
+  @keyframes pulse{to{transform:scale(1.25)}}
+
+  .card{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:28px;
+    padding:36px 22px 28px;
+    text-align:center;
+    box-shadow:0 30px 60px rgba(0,0,0,.5);
+    animation:rise .7s ease both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}}
+
+  /* وێنە */
+  .avatar{position:relative;width:128px;height:128px;margin:0 auto 18px}
+  .avatar::before{
+    content:"";position:absolute;inset:-4px;border-radius:26px;
+    background:conic-gradient(var(--gold),#a855f7,#38bdf8,var(--gold));
+    animation:spin 6s linear infinite;filter:blur(1px);
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .avatar .ph{
+    position:absolute;inset:0;border-radius:24px;background:#0b1224;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel',var(--font);font-weight:700;font-size:38px;color:var(--gold);
+  }
+  .avatar img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;border-radius:24px;border:3px solid var(--bg1);
+  }
+  .badge{
+    position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+    white-space:nowrap;
+    background:linear-gradient(135deg,#FDE047,var(--gold-d));
+    color:#0F172A;font-size:11px;font-weight:800;
+    padding:4px 12px;border-radius:12px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(202,138,4,.5);
+  }
+
+  h1{
+    font-family:'Cinzel',var(--font);
+    font-size:26px;margin:10px 0 4px;letter-spacing:.5px;
+    background:linear-gradient(135deg,#fff,var(--muted));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .tag{color:var(--gold);font-size:14px;font-weight:600;margin-bottom:18px}
+
+  .offer{
+    display:inline-block;
+    background:rgba(250,204,21,.1);
+    border:1px dashed rgba(250,204,21,.5);
+    color:var(--gold);font-size:13px;font-weight:600;
+    padding:8px 14px;border-radius:999px;margin-bottom:20px;
+  }
+
+  /* ئامار */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+  .stat{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:14px;padding:12px 4px;
+  }
+  .stat b{display:block;font-size:20px;color:#fff}
+  .stat span{font-size:11px;color:var(--muted)}
+
+  /* دوگمەکان */
+  .links{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+  .btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:15px 18px;border-radius:16px;text-decoration:none;color:#fff;
+    font-weight:600;font-size:15px;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(90deg,rgba(30,41,59,.85),rgba(51,65,85,.85));
+    transition:transform .25s,box-shadow .25s,border-color .25s;
+  }
+  .btn:hover,.btn:focus-visible{
+    transform:translateY(-3px);
+    border-color:rgba(250,204,21,.5);
+    box-shadow:0 10px 22px -6px rgba(250,204,21,.25);
+    outline:none;
+  }
+  .btn .arrow{transition:transform .25s}
+  .btn:hover .arrow{transform:translateX(-5px)}
+
+  .btn.primary{
+    padding:19px 18px;font-size:17px;font-weight:800;border:none;
+    background:linear-gradient(135deg,var(--wa),var(--wa-d));
+    box-shadow:0 12px 28px -6px rgba(37,211,102,.55);
+    animation:beat 2.4s infinite;
+  }
+  .btn.primary:hover{box-shadow:0 14px 34px -4px rgba(37,211,102,.75);animation:none}
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+
+  /* ڕای کڕیار */
+  .review{
+    background:rgba(255,255,255,.04);border-radius:16px;
+    padding:14px;margin-bottom:20px;
+    font-size:13px;line-height:1.8;color:#CBD5E1;
+  }
+  .review .stars{color:var(--gold);letter-spacing:2px;display:block;margin-bottom:4px}
+  .review small{display:block;color:var(--muted);margin-top:4px}
+
+  .trust{
+    display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+    color:var(--muted);font-size:12px;
+  }
+
+  /* دوگمەی فلۆتینگ واتسئاپ */
+  .float-wa{
+    position:fixed;z-index:5;bottom:18px;left:18px;
+    width:58px;height:58px;border-radius:50%;
+    background:var(--wa);
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;text-decoration:none;
+    box-shadow:0 8px 24px rgba(37,211,102,.55);
+  }
+  .float-wa::after{
+    content:"";position:absolute;inset:0;border-radius:50%;
+    border:2px solid var(--wa);animation:ring 2s infinite;
+  }
+  @keyframes ring{to{transform:scale(1.7);opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+
+<body>
+<div class="glow"></div>
+
+<main class="card">
+  <div class="avatar">
+    <div class="ph">BL</div>
+    <!-- لینکی ئۆنلاینی وێنەکەت لێرە دابنێ (https://...) -->
+    <img src="c:\Users\Dyary\Desktop\57950729-29ea-4871-8631-b73460857389.png" alt="FARAMOSH BonLINE" onerror="this.remove()">
+    <div class="badge">✔ Verified Pro</div>
+  </div>
+
+  <h1>FARAMOSH | BonLINE</h1>
+  <p class="tag">ڕاوێژکاری تایبەتی فرۆش</p>
+
+  <div class="offer">🔥 بۆنەکان گەرەنتی مانەوەی 24 کاتژمێریان بۆدەکرێت 🔥</div>
+
+
+  <nav class="links">
+    <a class="btn primary" href="https://wa.me/9647502018060?text=السَّلَامُ عَلَيْكُم" target="_blank" rel="noopener">
+  <span>💬 ئێستا لە واتسئاپ پەیوەندی بکە</span><span class="arrow">➔</span>
+</a>
+ <a class="btn" href="https://www.facebook.com/share/1F3LGDY4sR/" target="_blank" rel="noopener">
+      <span>📘 پەیجی فەیسبووک</span><span class="arrow">➔</span>
+    </a>
+    <a class="btn" href="https://instagram.com/yourpage" target="_blank" rel="noopener">
+      <span>📸   ئینستاگرام نییە بۆ جارێ</span><span class="arrow">➔</span>
+    </a>
+    
+  </nav>
+
+  <div class="review">
+    <span class="stars">★★★★★</span>
+    «خزمەتگوزارییەکی زۆر خێرا و باش بوو، دڵنیام دووبارە دەکڕمەوە.»
+    <small>— کڕیارێک (ڕایەکی ڕاستەقینە لێرە دابنێ)</small>
+  </div>
+
+  <div class="trust">
+    <span>⚡ خزمەتگوزاری خێرا</span>
+    <span>🔒 متمانەپێکراو</span>
+    <span>🚚 گەیاندن</span>
+  </div>
+</main>
+
+<a class="float-wa" href="https://wa.me/9647502018060?text=سڵاو، دەمەوێت زانیاری زیاتر بزانم" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</body>
+</html>
